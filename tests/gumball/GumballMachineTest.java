@@ -29,6 +29,7 @@ public class GumballMachineTest{
 		assertEquals(0.00, machine2.getTotal(), 0.1);
 		machine1.acceptQuarter();
 		assertEquals(0.25, machine1.getTotal(), 0.1);
+		assertEquals("You cannot insert another quarter", machine1.acceptQuarter());
 	}
 
 }

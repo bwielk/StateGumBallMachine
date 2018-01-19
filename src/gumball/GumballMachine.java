@@ -31,7 +31,14 @@ public class GumballMachine {
 		case NO_QUARTER:
 			state = HAS_QUARTER;
 			total += 0.25;
+			break;
+		case HAS_QUARTER:
+			result = "You cannot insert another quarter";
+			break;
+		case SOLD:
+			result = "The transaction is being processed";
 		}
+	
 		return result;
 	}
 
