@@ -9,6 +9,7 @@ public class GumballMachine {
 	
 	private int state = SOLD_OUT;
 	private int count = 0;
+	private double total = 0.0;
 	
 	public GumballMachine(int count){
 		this.count = count;
@@ -19,5 +20,22 @@ public class GumballMachine {
 	
 	public int getState(){
 		return state;
+	}
+	
+	public String acceptQuarter() {
+		String result = new String();
+		switch(state){
+		case SOLD_OUT: 
+			result = "There are no gums to sell";
+			break;
+		case NO_QUARTER:
+			state = HAS_QUARTER;
+			total += 0.25;
+		}
+		return result;
+	}
+
+	public double getTotal() {
+		return total;
 	}
 }
