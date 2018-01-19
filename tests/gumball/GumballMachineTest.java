@@ -17,19 +17,27 @@ public class GumballMachineTest{
 	}
 	
 	@Test
-	public void machinesUpdateItsStateDependingOnNumberOfGums() {
+	public void machinesUpdateItsStateDependingOnNumberOfGums(){
 		assertEquals(1, machine1.getState());
 		assertEquals(0, machine2.getState());
 	}
 	
 	@Test
-	public void machinesAcceptQuartesDependingOnState() {
+	public void machinesAcceptQuartesDependingOnState(){
 		machine2.acceptQuarter();
 		assertEquals("There are no gums to sell", machine2.acceptQuarter());
 		assertEquals(0.00, machine2.getTotal(), 0.1);
 		machine1.acceptQuarter();
 		assertEquals(0.25, machine1.getTotal(), 0.1);
 		assertEquals("You cannot insert another quarter", machine1.acceptQuarter());
+	}
+	
+	@Test
+	public void machineCanEjectAQuarter(){
+		machine1.acceptQuarter();
+		assertEquals(0.25, machine1.getTotal(), 0.1);
+		machine1.ejectQuarter();
+		assertEquals(0.0, machine1.getTotal(), 0.1);
 	}
 
 }

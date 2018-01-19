@@ -45,4 +45,18 @@ public class GumballMachine {
 	public double getTotal() {
 		return total;
 	}
+
+	public String ejectQuarter(){
+		String result = new String();
+		switch(state){
+		case NO_QUARTER:
+			result = "There is no coin to return";
+			break;
+		case HAS_QUARTER:
+			state = NO_QUARTER;
+			total -= 0.25;
+			break;	
+		}
+		return result;
+	}
 }
