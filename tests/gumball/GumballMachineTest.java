@@ -38,6 +38,15 @@ public class GumballMachineTest{
 		assertEquals(0.25, machine1.getTotal(), 0.1);
 		machine1.ejectQuarter();
 		assertEquals(0.0, machine1.getTotal(), 0.1);
+		assertEquals("There are no gums to sell", machine2.ejectQuarter());
+	}
+	
+	@Test
+	public void crankCanBeTurned(){
+		assertEquals("Insert a quarter to turn", machine1.turnCrank());
+		machine1.acceptQuarter();
+		assertEquals("Turned", machine1.turnCrank());
+		assertEquals("You turned but there are no gums", machine2.turnCrank());
 	}
 
 }

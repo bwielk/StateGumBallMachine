@@ -56,6 +56,28 @@ public class GumballMachine {
 			state = NO_QUARTER;
 			total -= 0.25;
 			break;	
+		case SOLD_OUT:
+			result = "There are no gums to sell";
+			break;
+		}
+		return result;
+	}
+
+	public String turnCrank() {
+		String result = new String();
+		switch(state){
+		case NO_QUARTER:
+			result = "Insert a quarter to turn";
+			break;
+		case HAS_QUARTER:
+			result = "Turned";
+			break;
+		case SOLD:
+			result = "Insert a quarter to get another gum";
+			break;
+		case SOLD_OUT:
+			result = "You turned but there are no gums";
+			break;
 		}
 		return result;
 	}
