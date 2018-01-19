@@ -71,6 +71,7 @@ public class GumballMachine {
 			break;
 		case HAS_QUARTER:
 			result = "Turned";
+			state = SOLD;
 			break;
 		case SOLD:
 			result = "Insert a quarter to get another gum";
@@ -80,5 +81,32 @@ public class GumballMachine {
 			break;
 		}
 		return result;
+	}
+
+	public String dispense() {
+		String result = new String();
+		switch(state){
+		case SOLD:
+			count -= 1;
+			if(count == 0){
+				state = SOLD_OUT;
+			}else{
+				state = NO_QUARTER;
+			}
+		case SOLD_OUT:
+			result = "No gums to dispense";
+			break;
+		case HAS_QUARTER:
+			result = "Turn the crank";
+			break;
+		case NO_QUARTER:
+			result = "Insert a quarter";
+			break;
+		}
+		return result;
+	}
+
+	public int getCount() {
+		return count;
 	}
 }
