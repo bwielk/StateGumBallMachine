@@ -23,6 +23,7 @@ public class WinnerState implements State {
 
 	public String dispense(){
 		gumballMachine.releaseGum();
+		System.out.println("You have won an extra gum ball!");
 		if(gumballMachine.getCount() == 0){
 			gumballMachine.setState(gumballMachine.getSoldOutState());
 		}else{
