@@ -24,6 +24,6 @@ public class NoQuarterState implements State {
 	}
 
 	public String dispense() {
-		return "Insert a quarter";
+		throw new UnsupportedOperationException();
 	}
 }

@@ -22,6 +22,6 @@ public class SoldOutState implements State {
 	}
 
 	public String dispense() {
-		return null;
+		return "No gums to dispense";
 	}
 }

@@ -71,6 +71,23 @@ public class GumballMachineTest{
 		assertEquals(20, machine5.getCount());
 	}
 	
+	//HasQuarterState
+	@Test
+	public void machineDoesntAcceptAnotherQuarterIfHasQuarterState(){
+		machine1.acceptQuarter();
+		machine3.acceptQuarter();
+		machine4.acceptQuarter();
+		machine5.acceptQuarter();
+		assertEquals("You cannot insert another quarter", machine1.acceptQuarter());
+		assertEquals("You cannot insert another quarter", machine3.acceptQuarter());
+		assertEquals("You cannot insert another quarter", machine4.acceptQuarter());
+		assertEquals("You cannot insert another quarter", machine5.acceptQuarter());
+		assertEquals(0.25, machine1.getTotal(), 0.1);
+		assertEquals(0.25, machine3.getTotal(), 0.1);
+		assertEquals(0.25, machine4.getTotal(), 0.1);
+		assertEquals(0.25, machine5.getTotal(), 0.1);
+	}
+	
 	//SoldOutState
 	@Test
 	public void machineDoesntAcceptQuartersIfAllGumsAreSoldOut(){
@@ -78,6 +95,17 @@ public class GumballMachineTest{
 		assertEquals(0.0, machine2.getTotal(), 0.1);
 		State state = machine2.getState();
 		assertEquals(SoldOutState.class, state.getClass());
+	}
+	
+	@Test
+	public void machineDoesntReturnAnyMoneyIfSoldOut(){
+		assertEquals(false, machine2.ejectQuarter());
+		assertEquals(0.0, machine2.getTotal(), 0.1);
+	}
+	
+	@Test
+	public void machineDoesntDispenseAnyMoneyIfGumsAreSoldOut(){
+		assertEquals("Error. Check if you have inserted a quarter or you have already turned the crank", machine2.turnCrank());
 	}
 
 	/*

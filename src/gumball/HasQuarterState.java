@@ -12,7 +12,6 @@ public class HasQuarterState implements State {
 	}
 
 	public String acceptQuarter() {
-		gumballMachine.setTotal(gumballMachine.getTotal() + 0.25);
 		return "You cannot insert another quarter";
 	}
 
