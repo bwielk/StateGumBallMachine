@@ -43,7 +43,6 @@ public class GumballMachine {
 		case SOLD:
 			result = "The transaction is being processed";
 		}
-	
 		return result;
 	}
 
