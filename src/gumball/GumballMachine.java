@@ -113,13 +113,12 @@ public class GumballMachine {
 		}
 		return result;
 	}*/
-
-	public int getCount() {
-		return count;
-	}
-	
 	public void setState(State state){
 		this.state = state;
+	}
+	
+	public int getCount() {
+		return count;
 	}
 	
 	public void releaseGum(){
@@ -139,6 +138,8 @@ public class GumballMachine {
 	public State getSoldState() {
 		return soldState;
 	}
-	
-	
+
+	public State getSoldOutState() {
+		return soldOutState;
+	}
 }
