@@ -11,19 +11,33 @@ public class GumballMachineTest{
 	
 	private GumballMachine machine1;
 	private GumballMachine machine2;
+	private GumballMachine machine3;
+	private GumballMachine machine4;
+	private GumballMachine machine5;
 	
 	@Before
 	public void before(){
-		machine1 = new GumballMachine(1);
+		machine1 = new GumballMachine(10);
 		machine2 = new GumballMachine(0); 
+		machine3 = new GumballMachine(4);
+		machine4 = new GumballMachine(5);
+		machine5 = new GumballMachine(20);
 	}
 	
 	@Test
 	public void machinesUpdateItsStateDependingOnNumberOfGums(){
-		assertEquals(1, machine1.getState());
-		assertEquals(0, machine2.getState());
+		State state = machine1.getState();
+		assertEquals(NoQuarterState.class, state.getClass());
+		State state1 = machine2.getState();
+		assertEquals(SoldOutState.class, state1.getClass());
+		State state2 = machine3.getState();
+		assertEquals(NoQuarterState.class, state2.getClass());
+		State state3 = machine4.getState();
+		assertEquals(NoQuarterState.class, state3.getClass());
+		State state4 = machine5.getState();
+		assertEquals(NoQuarterState.class, state4.getClass());
 	}
-	
+	/*
 	@Test
 	public void machinesAcceptQuartesDependingOnState(){
 		machine2.acceptQuarter();
@@ -86,5 +100,5 @@ public class GumballMachineTest{
 		
 		GumballMachine machine4 = new GumballMachine(3);
 		assertEquals("Insert a quarter", machine4.dispense());
-	}
+	}*/
 }
