@@ -1,21 +1,25 @@
 package gumball;
 
 public class GumballMachine {
-
-	private final static int SOLD_OUT = 0;
-	private final static int NO_QUARTER = 1;
-	private final static int HAS_QUARTER = 2;
-	private final static int SOLD = 3;
 	
-	private int state = SOLD_OUT;
+	private State noQuarterState;
+	private State hasQuarterState;
+	private State soldState;
+	private State soldOutState;
+	
+	private State state = soldOutState;
 	private int count = 0;
 	private double total = 0.0;
 	private String result;
 	
 	public GumballMachine(int count){
+		this.noQuarterState = new NoQuarterState(this);
+		this.hasQuarterState = new HasQuarterState(this);
+		this.soldState = new SoldState(this);
+		this.soldOutState = new SoldOutState(this);
 		this.count = count;
 		if(count > 0){
-			state = NO_QUARTER;
+			state = noQuarterState;
 		}
 		this.result = new String();
 	}
@@ -29,7 +33,8 @@ public class GumballMachine {
 	}
 	
 	public String acceptQuarter() {
-		switch(state){
+		state.acceptQuarter();
+		/*switch(state){
 		case SOLD_OUT: 
 			result = "There are no gums to sell";
 			break;
@@ -43,11 +48,12 @@ public class GumballMachine {
 		case SOLD:
 			result = "The transaction is being processed";
 		}
-		return result;
+		return result;*/
 	}
 
 	public String ejectQuarter(){
-		switch(state){
+		state.ejectQuarter();
+		/*switch(state){
 		case NO_QUARTER:
 			result = "There is no coin to return";
 			break;
@@ -61,11 +67,13 @@ public class GumballMachine {
 		case SOLD:
 			result = "Sorry, too late. You have already turned the crank ";
 		}
-		return result;
+		return result;*/
 	}
 
 	public String turnCrank() {
-		switch(state){
+		state.turnCrank();
+		state.dispense();
+		/*switch(state){
 		case NO_QUARTER:
 			result = "Insert a quarter to turn";
 			break;
@@ -80,10 +88,11 @@ public class GumballMachine {
 			result = "You turned but there are no gums";
 			break;
 		}
-		return result;
+		return result;*/
 	}
 
-	public String dispense() {
+	/*public String dispense() {
+		
 		switch(state){
 		case SOLD:
 			count -= 1;
@@ -103,9 +112,25 @@ public class GumballMachine {
 			break;
 		}
 		return result;
-	}
+	}*/
 
 	public int getCount() {
 		return count;
 	}
+	
+	public void setState(State state){
+		this.state = state;
+	}
+	
+	public void releaseGum(){
+		if(count != 0){
+			count -= 1;
+		}
+	}
+
+	public State getHasQuarterState() {
+		return hasQuarterState;
+	}
+	
+	
 }
