@@ -10,12 +10,18 @@ public class GumballMachine {
 	private int state = SOLD_OUT;
 	private int count = 0;
 	private double total = 0.0;
+	private String result;
 	
 	public GumballMachine(int count){
 		this.count = count;
 		if(count > 0){
 			state = NO_QUARTER;
 		}
+		this.result = new String();
+	}
+
+	public double getTotal() {
+		return total;
 	}
 	
 	public int getState(){
@@ -23,7 +29,6 @@ public class GumballMachine {
 	}
 	
 	public String acceptQuarter() {
-		String result = new String();
 		switch(state){
 		case SOLD_OUT: 
 			result = "There are no gums to sell";
@@ -42,12 +47,7 @@ public class GumballMachine {
 		return result;
 	}
 
-	public double getTotal() {
-		return total;
-	}
-
 	public String ejectQuarter(){
-		String result = new String();
 		switch(state){
 		case NO_QUARTER:
 			result = "There is no coin to return";
@@ -59,12 +59,13 @@ public class GumballMachine {
 		case SOLD_OUT:
 			result = "There are no gums to sell";
 			break;
+		case SOLD:
+			result = "Sorry, too late. You have already turned the crank ";
 		}
 		return result;
 	}
 
 	public String turnCrank() {
-		String result = new String();
 		switch(state){
 		case NO_QUARTER:
 			result = "Insert a quarter to turn";
@@ -84,7 +85,6 @@ public class GumballMachine {
 	}
 
 	public String dispense() {
-		String result = new String();
 		switch(state){
 		case SOLD:
 			count -= 1;

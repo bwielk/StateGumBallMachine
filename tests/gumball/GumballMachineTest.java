@@ -30,6 +30,10 @@ public class GumballMachineTest{
 		machine1.acceptQuarter();
 		assertEquals(0.25, machine1.getTotal(), 0.1);
 		assertEquals("You cannot insert another quarter", machine1.acceptQuarter());
+		GumballMachine machine3 = new GumballMachine(3);
+		machine3.acceptQuarter();
+		machine3.turnCrank();
+		assertEquals("The transaction is being processed", machine3.acceptQuarter());
 	}
 	
 	@Test
@@ -39,6 +43,11 @@ public class GumballMachineTest{
 		machine1.ejectQuarter();
 		assertEquals(0.0, machine1.getTotal(), 0.1);
 		assertEquals("There are no gums to sell", machine2.ejectQuarter());
+		GumballMachine machine3 = new GumballMachine(3);
+		machine3.acceptQuarter();
+		machine3.turnCrank();
+		machine3.dispense();
+		assertEquals("There is no coin to return", machine3.ejectQuarter());
 	}
 	
 	@Test
@@ -47,6 +56,7 @@ public class GumballMachineTest{
 		machine1.acceptQuarter();
 		assertEquals("Turned", machine1.turnCrank());
 		assertEquals("You turned but there are no gums", machine2.turnCrank());
+	
 	}
 	
 	@Test
