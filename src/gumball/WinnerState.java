@@ -21,7 +21,7 @@ public class WinnerState implements State {
 		return false;
 	}
 
-	public String dispense() {
+	public String dispense(){
 		gumballMachine.releaseGum();
 		if(gumballMachine.getCount() == 0){
 			gumballMachine.setState(gumballMachine.getSoldOutState());
