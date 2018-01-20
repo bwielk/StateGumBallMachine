@@ -12,12 +12,13 @@ public class SoldOutState implements State {
 		return "There are no gums to sell so we are not accepting your quarter";
 	}
 
-	public String ejectQuarter() {
-		return "There are no gums to sell so we didn't accept your quarter";
+	public boolean ejectQuarter() {
+		System.out.println("There are no gums to sell so we didn't accept your quarter");
+		return false;
 	}
 
-	public String turnCrank() {
-		return "You turned but there are no gums to sell";
+	public boolean turnCrank() {
+		return false;
 	}
 
 	public String dispense() {

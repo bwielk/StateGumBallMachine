@@ -1,6 +1,6 @@
 package gumball;
 
-import java.util.Random;
+import java.util.Random; 
 
 public class HasQuarterState implements State {
 	
@@ -16,20 +16,21 @@ public class HasQuarterState implements State {
 		return "You cannot insert another quarter";
 	}
 
-	public String ejectQuarter() {
+	public boolean ejectQuarter() {
 		gumballMachine.setTotal(gumballMachine.getTotal() - 0.25);
 		gumballMachine.setState(gumballMachine.getNoQuarterState());
-		return "Quarter returned";
+		System.out.println("Quarter returned");
+		return true;
 	}
 
-	public String turnCrank() {
+	public boolean turnCrank() {
 		int winner = randomWinner.nextInt(10);
 		if(winner == 0 && gumballMachine.getCount() > 1){
 			gumballMachine.setState(gumballMachine.getWinnerState());
 		}else{
 			gumballMachine.setState(gumballMachine.getSoldState());
 		}
-		return "You have turned the crank";
+		return true;
 	}
 
 	public String dispense() {

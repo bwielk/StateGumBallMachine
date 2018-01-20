@@ -69,21 +69,33 @@ public class GumballMachine {
 	// ACTIONS
 	
 	public String acceptQuarter() {
-		state.acceptQuarter();
+		result = state.acceptQuarter();
+		return result;
 	}
 
-	public String ejectQuarter(){
-		state.ejectQuarter();
+	public boolean ejectQuarter(){
+		return state.ejectQuarter();
 	}
 
 	public String turnCrank() {
-		state.turnCrank();
-		state.dispense();
+		if(state.turnCrank()){
+			result = state.dispense();
+		}else{
+			result = "Error. Check if you have inserted a quarter or you have already turned the crank";
+		}
+		return result;
 	}
 	
 	public void releaseGum(){
 		if(count != 0){
 			count -= 1;
+		}
+	}
+	
+	public void refillGumballs(int amount){
+		if(state == soldOutState){
+			count = amount;
+			state = noQuarterState;
 		}
 	}
 }

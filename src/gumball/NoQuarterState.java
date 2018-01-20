@@ -13,12 +13,13 @@ public class NoQuarterState implements State {
 		return "Quarter insterted";
 	}
 
-	public String ejectQuarter() {
-		return "There is no coin to return. Insert a quarter";
+	public boolean ejectQuarter() {
+		System.out.println("There is no coin to return. Insert a quarter");
+		return false;
 	}
 
-	public String turnCrank() {
-		return "Insert a quarter to turn";
+	public boolean turnCrank() {
+		return false;
 	}
 
 	public String dispense() {

@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import gumball.GumballMachine;
+
 public class GumballMachineTest{
 	
 	private GumballMachine machine1;

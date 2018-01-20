@@ -12,12 +12,13 @@ public class SoldState implements State {
 		return "The transaction is being processed";
 	}
 
-	public String ejectQuarter() {
-		return "Sorry, too late. You have already turned the crank ";
+	public boolean ejectQuarter() {
+		System.out.println("Sorry, too late. You have already turned the crank ");
+		return false;
 	}
 
-	public String turnCrank() {
-		return "Insert a quarter to get another gum";
+	public boolean turnCrank() {
+		return false;
 	}
 
 	public String dispense() {
