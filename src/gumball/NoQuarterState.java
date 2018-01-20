@@ -9,6 +9,7 @@ public class NoQuarterState implements State {
 	}
 
 	public String acceptQuarter() {
+		gumballMachine.setTotal(gumballMachine.getTotal() + 0.25);
 		gumballMachine.setState(gumballMachine.getHasQuarterState());
 		return "Quarter insterted";
 	}

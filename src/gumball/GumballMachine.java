@@ -73,7 +73,7 @@ public class GumballMachine {
 
 	// ACTIONS
 	
-	public String acceptQuarter() {
+	public String acceptQuarter(){
 		result = state.acceptQuarter();
 		return result;
 	}

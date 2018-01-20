@@ -37,6 +37,49 @@ public class GumballMachineTest{
 		State state4 = machine5.getState();
 		assertEquals(NoQuarterState.class, state4.getClass());
 	}
+	
+	//NoQuartersState
+	@Test
+	public void machinesAcceptQuartersInNoQuarterState(){
+		machine1.acceptQuarter();
+		State state = machine1.getState();
+		assertEquals(0.25, machine1.getTotal(), 0.1);
+		assertEquals(HasQuarterState.class, state.getClass());
+		machine3.acceptQuarter();
+		State state1 = machine3.getState();
+		assertEquals(0.25, machine3.getTotal(), 0.1);
+		assertEquals(HasQuarterState.class, state1.getClass());
+	}
+	
+	@Test
+	public void machinesCannotEjectQuarterIfNoQuarterState(){
+		assertEquals(false, machine1.ejectQuarter());
+		assertEquals(false, machine3.ejectQuarter());
+		assertEquals(false, machine4.ejectQuarter());
+		assertEquals(false, machine5.ejectQuarter());
+	}
+	
+	@Test
+	public void machinesCannotGetAGumIfNoQuarterState(){
+		assertEquals("Error. Check if you have inserted a quarter or you have already turned the crank", machine1.turnCrank());
+		assertEquals(10, machine1.getCount());
+		assertEquals("Error. Check if you have inserted a quarter or you have already turned the crank", machine3.turnCrank());
+		assertEquals(4, machine3.getCount());
+		assertEquals("Error. Check if you have inserted a quarter or you have already turned the crank", machine4.turnCrank());
+		assertEquals(5, machine4.getCount());
+		assertEquals("Error. Check if you have inserted a quarter or you have already turned the crank", machine5.turnCrank());
+		assertEquals(20, machine5.getCount());
+	}
+	
+	//SoldOutState
+	@Test
+	public void machineDoesntAcceptQuartersIfAllGumsAreSoldOut(){
+		assertEquals("There are no gums to sell so we are not accepting your quarter", machine2.acceptQuarter());
+		assertEquals(0.0, machine2.getTotal(), 0.1);
+		State state = machine2.getState();
+		assertEquals(SoldOutState.class, state.getClass());
+	}
+
 	/*
 	@Test
 	public void machinesAcceptQuartesDependingOnState(){
