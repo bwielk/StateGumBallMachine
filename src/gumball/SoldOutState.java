@@ -7,29 +7,20 @@ public class SoldOutState implements State {
 	public SoldOutState(GumballMachine gumballMachine){
 		this.gumballMachine = gumballMachine;
 	}
-
-	@Override
+	
 	public String acceptQuarter() {
-		// TODO Auto-generated method stub
-		return null;
+		return "There are no gums to sell so we are not accepting your quarter";
 	}
 
-	@Override
 	public String ejectQuarter() {
-		// TODO Auto-generated method stub
-		return null;
+		return "There are no gums to sell so we didn't accept your quarter";
 	}
 
-	@Override
 	public String turnCrank() {
-		// TODO Auto-generated method stub
-		return null;
+		return "You turned but there are no gums to sell";
 	}
 
-	@Override
 	public String dispense() {
-		// TODO Auto-generated method stub
 		return null;
 	}
-
 }
