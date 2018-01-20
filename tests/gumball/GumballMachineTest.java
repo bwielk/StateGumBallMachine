@@ -24,6 +24,13 @@ public class GumballMachineTest{
 		machine5 = new GumballMachine(20);
 	}
 	
+	private void acceptQuarter(){
+		machine1.acceptQuarter();
+		machine3.acceptQuarter();
+		machine4.acceptQuarter();
+		machine5.acceptQuarter();
+	}
+	
 	@Test
 	public void machinesUpdateItsStateDependingOnNumberOfGums(){
 		State state = machine1.getState();
@@ -74,14 +81,64 @@ public class GumballMachineTest{
 	//HasQuarterState
 	@Test
 	public void machineDoesntAcceptAnotherQuarterIfHasQuarterState(){
-		machine1.acceptQuarter();
-		machine3.acceptQuarter();
-		machine4.acceptQuarter();
-		machine5.acceptQuarter();
+		acceptQuarter();
 		assertEquals("You cannot insert another quarter", machine1.acceptQuarter());
 		assertEquals("You cannot insert another quarter", machine3.acceptQuarter());
 		assertEquals("You cannot insert another quarter", machine4.acceptQuarter());
 		assertEquals("You cannot insert another quarter", machine5.acceptQuarter());
+		assertEquals(0.25, machine1.getTotal(), 0.1);
+		assertEquals(0.25, machine3.getTotal(), 0.1);
+		assertEquals(0.25, machine4.getTotal(), 0.1);
+		assertEquals(0.25, machine5.getTotal(), 0.1);
+	}
+	
+	@Test
+	public void machineCanEjectQuarterIfRequested(){
+		acceptQuarter();
+		assertEquals(0.25, machine1.getTotal(), 0.1);
+		assertEquals(0.25, machine3.getTotal(), 0.1);
+		assertEquals(0.25, machine4.getTotal(), 0.1);
+		assertEquals(0.25, machine5.getTotal(), 0.1);
+		assertEquals(true, machine1.ejectQuarter());
+		assertEquals(true, machine3.ejectQuarter());
+		assertEquals(true, machine4.ejectQuarter());
+		assertEquals(true, machine5.ejectQuarter());
+		assertEquals(0.0, machine1.getTotal(), 0.1);
+		assertEquals(0.0, machine3.getTotal(), 0.1);
+		assertEquals(0.0, machine4.getTotal(), 0.1);
+		assertEquals(0.0, machine5.getTotal(), 0.1);
+	}
+	
+	@Test
+	public void machineDispensesAGumballIfHasQuarter(){
+		acceptQuarter();
+		machine1.turnCrank();
+		machine3.turnCrank();
+		machine4.turnCrank();
+		machine5.turnCrank();
+		assertEquals(0.25, machine1.getTotal(), 0.1);
+		assertEquals(0.25, machine3.getTotal(), 0.1);
+		assertEquals(0.25, machine4.getTotal(), 0.1);
+		assertEquals(0.25, machine5.getTotal(), 0.1);
+		assertEquals(9, machine1.getCount());
+		assertEquals(3, machine3.getCount());
+		assertEquals(4, machine4.getCount());
+		assertEquals(19, machine5.getCount());
+	}
+	
+	//SoldState - Processing the transaction
+	
+	@Test
+	public void machineDoesntAcceptQuartersIfSoldStatus(){
+		acceptQuarter();
+		machine1.setState(machine1.getSoldState());
+		machine3.setState(machine3.getSoldState());
+		machine4.setState(machine4.getSoldState());
+		machine5.setState(machine5.getSoldState());
+		assertEquals("The transaction is being processed", machine1.acceptQuarter());
+		assertEquals("The transaction is being processed", machine3.acceptQuarter());
+		assertEquals("The transaction is being processed", machine4.acceptQuarter());
+		assertEquals("The transaction is being processed", machine5.acceptQuarter());
 		assertEquals(0.25, machine1.getTotal(), 0.1);
 		assertEquals(0.25, machine3.getTotal(), 0.1);
 		assertEquals(0.25, machine4.getTotal(), 0.1);
@@ -107,69 +164,4 @@ public class GumballMachineTest{
 	public void machineDoesntDispenseAnyMoneyIfGumsAreSoldOut(){
 		assertEquals("Error. Check if you have inserted a quarter or you have already turned the crank", machine2.turnCrank());
 	}
-
-	/*
-	@Test
-	public void machinesAcceptQuartesDependingOnState(){
-		machine2.acceptQuarter();
-		assertEquals("There are no gums to sell", machine2.acceptQuarter());
-		assertEquals(0.00, machine2.getTotal(), 0.1);
-		
-		machine1.acceptQuarter();
-		assertEquals(0.25, machine1.getTotal(), 0.1);
-		
-		assertEquals("You cannot insert another quarter", machine1.acceptQuarter());
-		
-		GumballMachine machine3 = new GumballMachine(3);
-		machine3.acceptQuarter();
-		machine3.turnCrank();
-		assertEquals("The transaction is being processed", machine3.acceptQuarter());
-	}
-	
-	@Test
-	public void machineCanEjectAQuarter(){
-		machine1.acceptQuarter();
-		assertEquals(0.25, machine1.getTotal(), 0.1);
-		
-		machine1.ejectQuarter();
-		assertEquals(0.0, machine1.getTotal(), 0.1);
-		
-		assertEquals("There are no gums to sell", machine2.ejectQuarter());
-		
-		GumballMachine machine3 = new GumballMachine(3);
-		machine3.acceptQuarter();
-		machine3.turnCrank();
-		machine3.dispense();
-		assertEquals("There is no coin to return", machine3.ejectQuarter());
-	}
-	
-	@Test
-	public void crankCanBeTurned(){
-		assertEquals("Insert a quarter to turn", machine1.turnCrank());
-		
-		machine1.acceptQuarter();
-		
-		assertEquals("Turned", machine1.turnCrank());
-		
-		assertEquals("You turned but there are no gums", machine2.turnCrank());
-	
-	}
-	
-	@Test
-	public void machineCanDispenseGums(){
-		assertEquals("No gums to dispense", machine2.dispense());
-		
-		machine1.acceptQuarter();
-		machine1.turnCrank();
-		machine1.dispense();
-		assertEquals(0, machine1.getCount());
-		assertEquals(0.25, machine1.getTotal(), 0.1);
-		
-		GumballMachine machine3 = new GumballMachine(3);
-		machine3.acceptQuarter();
-		assertEquals("Turn the crank", machine3.dispense());
-		
-		GumballMachine machine4 = new GumballMachine(3);
-		assertEquals("Insert a quarter", machine4.dispense());
-	}*/
 }
