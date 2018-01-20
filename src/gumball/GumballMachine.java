@@ -131,6 +131,14 @@ public class GumballMachine {
 	public State getHasQuarterState() {
 		return hasQuarterState;
 	}
+
+	public State getNoQuarterState() {
+		return noQuarterState;
+	}
+
+	public State getSoldState() {
+		return soldState;
+	}
 	
 	
 }

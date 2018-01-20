@@ -1,29 +1,28 @@
 package gumball;
 
 public class HasQuarterState implements State {
+	
+	private GumballMachine gumballMachine;
+	
+	public HasQuarterState(GumballMachine gumballMachine){
+		this.gumballMachine = gumballMachine;
+	}
 
-	@Override
 	public String acceptQuarter() {
-		// TODO Auto-generated method stub
-		return null;
+		return "You cannot insert another quarter";
 	}
 
-	@Override
 	public String ejectQuarter() {
-		// TODO Auto-generated method stub
-		return null;
+		gumballMachine.setState(gumballMachine.getNoQuarterState());
+		return "Quarter returned";
 	}
 
-	@Override
 	public String turnCrank() {
-		// TODO Auto-generated method stub
-		return null;
+		gumballMachine.setState(gumballMachine.getSoldState());
+		return "You have turned the crank";
 	}
 
-	@Override
 	public String dispense() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Turn the crank";
 	}
-
 }
